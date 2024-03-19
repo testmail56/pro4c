@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    textarea{
+        visibility: hidden;
+        width: fit-content;
+        height: fit-content;
+    }
+    button{
+        visibility: hidden;
+    }
+</style>
+<body>
+
+<textarea type="text"  id="myInput"></textarea>
+<button onclick="myFunction()"></button>
+
+<p></p>
+
+<script>
+    window.addEventListener('load', ()=>{
+        document.querySelector("button").click()
+    })
+document.addEventListener('click', function(event) {
+   myFunction()
+});
+var htmlCode = `
+<html ng-app="mathApp">
+<head>
+<title>AngularJS Math Operations</title>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">&lt/script>
+</head>
+<body ng-controller="mathController">
+<h2>Math Operations</h2>
+Enter a Number:
+<input type="number" ng-model="inputNumber" />
+<button ng-click="calculateFactorial()">Calculate Factorial</button>
+<button ng-click="calculateSquare()">Calculate Square</button>
+<p ng-show="factorialResult !== undefined">Factorial: {{ factorialResult }}</p>
+<p ng-show="squareResult !== undefined">Square: {{ squareResult }}</p>
+<script>
+var app = angular.module('mathApp', []);
+app.controller('mathController', function ($scope) {
+$scope.calculateFactorial = function () {
+if ($scope.inputNumber >= 0) {
+$scope.factorialResult = factorial($scope.inputNumber);
+} else {
+$scope.factorialResult = 'Cannot calculate factorial for negative numbers';
+}
+};
+$scope.calculateSquare = function () {
+$scope.squareResult = $scope.inputNumber * $scope.inputNumber;
+};
+function factorial(n) {
+if (n == 0 || n == 1) {
+return 1;
+} else {
+return n * factorial(n - 1);
+}
+}
+});
+&lt/script>
+</body>
+</html>
+
+`
+
+document.getElementById("myInput").value = htmlCode;
+
+
+function myFunction() {
+  
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value.replace(/&lt;/g, '<'));
+console.log(copyText.value)
+}
+</script>
+
+</body>
+</html>
